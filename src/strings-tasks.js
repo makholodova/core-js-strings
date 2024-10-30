@@ -323,8 +323,9 @@ function countVowels(str) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const string = str.replace(/[',.!?\s]/g, '').toLowerCase();
+  return string === string.split('').reverse().join('');
 }
 
 /**
@@ -355,8 +356,13 @@ function findLongestWord(sentence) {
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {
-  throw new Error('Not implemented');
+function reverseWords(str) {
+  return str
+    .split(' ')
+    .map((word) => {
+      return word.split('').reverse().join('');
+    })
+    .join(' ');
 }
 
 /**
@@ -428,7 +434,7 @@ function extractNameFromTemplate(value) {
  *   unbracketTag('<a>') => 'a'
  */
 function unbracketTag(str) {
-  return str.replace(/<|>/gi, '');
+  return str.replace(/<|>/g, '');
 }
 
 /**
@@ -494,8 +500,28 @@ function encodeToRot13(/* str */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const suit = value.slice(-1);
+  const rank = value.slice(0, -1);
+
+  const cardSuits = ['♣', '♦', '♥', '♠'];
+  const cardRanks = [
+    'A',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    'J',
+    'Q',
+    'K',
+  ];
+
+  return cardRanks.indexOf(rank) + 13 * cardSuits.indexOf(suit);
 }
 
 module.exports = {
